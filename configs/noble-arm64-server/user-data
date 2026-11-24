@@ -17,13 +17,24 @@
 # Some additional examples are provided in comments below the default
 # configuration.
 
+user:
+  name: discodeck
+  plain_text_password: discodeck
+  lock_passwd: false
+users:
+  - default
+
+runcmd:
+  - echo "unattended-upgrades unattended-upgrades/enable_auto_updates boolean true" | debconf-selections
+  - dpkg-reconfigure -f noninteractive unattended-upgrades
+
 # On first boot, set the (default) ubuntu user's password to "ubuntu" and
 # expire user passwords
 chpasswd:
-  expire: true
+  expire: false
   users:
-  - name: ubuntu
-    password: ubuntu
+  - name: discodeck
+    password: discodeck
     type: text
 
 ## Set the system's hostname. Please note that, unless you have a local DNS
@@ -31,7 +42,7 @@ chpasswd:
 ## setting the hostname here will not make the machine reachable by this name.
 ## You may also wish to install avahi-daemon (see the "packages:" key below)
 ## to make your machine reachable by the .local domain
-#hostname: ubuntu
+hostname: discodeck
 
 ## Set up the keyboard layout. See localectl(1), in particular the various
 ## list-x11-* sub-commands, to determine the available models, layouts,
@@ -46,7 +57,7 @@ chpasswd:
 # prevents logging into SSH with a password. Changing this is a security risk
 # and you should at the very least ensure a different default password is
 # specified above
-ssh_pwauth: false
+ssh_pwauth: true
 
 ## On first boot, use ssh-import-id to give the specific users SSH access to
 ## the default user
@@ -72,8 +83,8 @@ ssh_pwauth: false
 #  passwd: $5$hkui88$nvZgIle31cNpryjRfO9uArF7DYiBcWEnjqq7L1AQNN3
 
 ## Update apt database and upgrade packages on first boot
-#package_update: true
-#package_upgrade: true
+package_update: false
+package_upgrade: false
 
 ## Install additional packages on first boot
 #packages:
