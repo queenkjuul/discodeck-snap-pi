@@ -27,6 +27,7 @@ users:
 runcmd:
   - echo "unattended-upgrades unattended-upgrades/enable_auto_updates boolean true" | debconf-selections
   - dpkg-reconfigure -f noninteractive unattended-upgrades
+  - systemctl enable discodeck.service
 
 # On first boot, set the (default) ubuntu user's password to "ubuntu" and
 # expire user passwords
